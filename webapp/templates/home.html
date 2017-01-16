@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino WebApp</title>
+</head>
+<body>
+	<h1>Message of the arduino</h1>
+	<ul id="arduino_data">
+		<!-- <li>{{ arduino_output }}</li> -->
+	</ul>
+</body>
+</html>
+
+<script
+  src="http://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	window.setInterval(function(){
+		$.get('http://localhost:5000/read_from_arduino', function(data){
+			$("#arduino_data").append('<li>'+ data +'</li>');
+		});
+	}, 3000);
+</script>
