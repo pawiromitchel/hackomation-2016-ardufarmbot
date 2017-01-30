@@ -3,9 +3,8 @@
 ## Stap 1 Uploaden naar de Arduino
 Upload dit naar je arduino ~> https://github.com/pawiromitchel/ardufarmbot/blob/master/simple_serial_output/simple_serial_output.ino
 
-## Stap 2 
+## Stap 2 Testen als python de Arduino outputs kan uitlezen
 
-## Stap 3 Opzetten van een python server op de Rasberry Pi
 De packages die nodig zijn voor python zijn: 
 - python
 - flask (renderen van de html pagina's)
@@ -17,14 +16,7 @@ sudo apt-get -y install python
 sudo pip install flask pyserial ino
 ```
 
-## Runnen van de server
-In de webapp/ folder bestaat er een __init__.py. Om de python server te runnen is deze command nodig:
-
-```
-python __init__.py
-```
-
-Als het niet werkt, moet je je port checken in de source code van de __init__.py
+Lezen uit de arduino script ~> https://github.com/pawiromitchel/ardufarmbot/blob/master/read_from_arduino.py
 
 Hier is de port `/dev/ttyACM0`
 
@@ -44,3 +36,16 @@ while True:
     print(ser.readline())
     
 ```
+
+Om dit te runnen doe je `python read_from_arduino.py`
+
+## Stap 4 Runnen van de server
+In de webapp/ folder bestaat er een __init__.py. Om de python server te runnen is deze command nodig:
+
+```
+python __init__.py
+```
+
+Als het niet werkt, moet je je port checken in de source code van de __init__.py
+
+
