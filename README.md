@@ -39,7 +39,7 @@ while True:
 
 Om dit te runnen doe je `python read_from_arduino.py`
 
-## Stap 4 Runnen van de server
+## Stap 3 Runnen van de server
 In de webapp/ folder bestaat er een __init__.py. Om de python server te runnen is deze command nodig:
 
 ```
