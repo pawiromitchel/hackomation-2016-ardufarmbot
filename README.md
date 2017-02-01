@@ -142,4 +142,4 @@ https://github.com/pawiromitchel/ardufarmbot/tree/master/applicatie/templates
 
 Hierin zitten de templates van de applicatie. Wanneer dat aangepast wordt, MOET de server opnieuw gestart worden voordat het effect heeft op de applicatie. 
 
-
+<img src="https://raw.githubusercontent.com/pawiromitchel/ardufarmbot/master/img/De%20applicatie%20met%20buttons.jpg">
