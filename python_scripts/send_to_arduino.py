@@ -12,4 +12,6 @@ time.sleep(1.5)
 
 # write stuff to it!
 ser.write('pomp_aan')
+time.sleep(1.5)
+ser.write('pomp_uit')
 ser.close()

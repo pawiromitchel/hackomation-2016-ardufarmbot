@@ -20,7 +20,12 @@ void loop() {
       if(digitalRead(pomp) == LOW){
         delay(200);
         digitalWrite(pomp, HIGH);
-      } else {
+      }
+    }
+    
+    if (command == "pomp_uit"){
+      // control de pomp
+      if(digitalRead(pomp) == HIGH){
         delay(200);
         digitalWrite(pomp, LOW);
       }

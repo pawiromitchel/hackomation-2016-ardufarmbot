@@ -5,38 +5,56 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 </head>
 <body>
-	<h1>Message of the arduino</h1>
-	<button id="button_aan">Aan knop</button>
-	<button id="button_knop">Uit knop</button>
-	<ul id="arduino_data">
-		<!-- <li>{{ arduino_output }}</li> -->
-	</ul>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1>Ardufarmbot</h1>
+				<div class="well bs-component">
+					<form action="" class="form-horizontal">
+						<fieldset>
+							<legend>Pompbediening</legend>
+							<div class="form-group">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<button class="btn btn-success" id="pomp_aan">Aan</button>
+									<button class="btn btn-danger" id="pomp_uit">Uit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="well bs-component">
+					<form class="form-horizontal">
+						<fieldset>
+							<legend>Sensoren</legend>
+							<div class="form-group">
+								<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<button class="btn btn-success" id="button_aan">Aan</button>
+									<button class="btn btn-danger" id="button_knop">Uit</button>
+								</div> -->
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 
-<script
-  src="http://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
 
 <script type="text/javascript">
 
-	$("#button_aan").click(function(){
-		$.post('http://localhost:5000/maak_lamp_aan',{
-			command: "maak_lamp_aan"
-		}, function(data){
-			
+	$("#pomp_aan").click(function(){
+		$.get('http://localhost:5000/pomp/aan', function(data){
+			alert("pomp is nu aan");
 		});
 	});
 
-
-	$("#button_knop").click(function(){
-		alert("Uit knop ingedrukt");
+	$("#pomp_uit").click(function(){
+		$.get('http://localhost:5000/pomp/uit', function(data){
+			alert("pomp is nu uit");
+		});
 	});
 
-	// window.setInterval(function(){
-	// 	$.get('http://localhost:5000/read_from_arduino', function(data){
-	// 		$("#arduino_data").append('<li>'+ data +'</li>');
-	// 	});
-	// }, 3000);
 </script>
