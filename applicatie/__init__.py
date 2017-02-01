@@ -1,6 +1,3 @@
-# using Python Flask Framework
-# arch users : sudo pip install flask
-
 from flask import Flask, render_template
 
 # for reading from the usb serial
@@ -23,7 +20,6 @@ def read_from_arduino():
 # render the dashboard
 @app.route("/")
 def hello():
-	# render
 	return render_template('home.html')
 
 # run the app

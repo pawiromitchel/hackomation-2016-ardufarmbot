@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino WebApp</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+</head>
+<body>
+	<h1>Message of the arduino</h1>
+	<button id="button_aan">Aan knop</button>
+	<button id="button_knop">Uit knop</button>
+	<ul id="arduino_data">
+		<!-- <li>{{ arduino_output }}</li> -->
+	</ul>
+</body>
+</html>
+
+<script
+  src="http://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+	$("#button_aan").click(function(){
+		$.post('http://localhost:5000/maak_lamp_aan',{
+			command: "maak_lamp_aan"
+		}, function(data){
+			
+		});
+	});
+
+
+	$("#button_knop").click(function(){
+		alert("Uit knop ingedrukt");
+	});
+
+	// window.setInterval(function(){
+	// 	$.get('http://localhost:5000/read_from_arduino', function(data){
+	// 		$("#arduino_data").append('<li>'+ data +'</li>');
+	// 	});
+	// }, 3000);
+</script>
