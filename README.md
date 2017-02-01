@@ -1,9 +1,8 @@
 # Hackomation 2016
 
-## Stap 1 Uploaden naar de Arduino
-Upload dit naar je arduino ~> https://github.com/pawiromitchel/ardufarmbot/blob/master/simple_serial_output/simple_serial_output.ino
+## Stap 0 Setting up
 
-## Stap 2 Testen als python de Arduino outputs kan uitlezen
+`sudo gpasswd --add ${USER} dialout`
 
 De packages die nodig zijn voor python zijn: 
 - python
@@ -15,6 +14,11 @@ De packages die nodig zijn voor python zijn:
 sudo apt-get -y install python
 sudo pip install flask pyserial ino
 ```
+
+## Stap 1 Uploaden naar de Arduino
+Upload dit naar je arduino ~> https://github.com/pawiromitchel/ardufarmbot/blob/master/simple_serial_output/simple_serial_output.ino
+
+## Stap 2 Testen als python de Arduino outputs kan uitlezen
 
 Lezen uit de arduino script ~> https://github.com/pawiromitchel/ardufarmbot/blob/master/read_from_arduino.py
 
