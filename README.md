@@ -11,7 +11,7 @@ De packages die nodig zijn voor python zijn:
 - ino (uploaden van arduino scripts)
 
 ```
-sudo apt-get -y install python
+sudo apt-get -y install python python-pip
 sudo pip install flask pyserial ino
 ```
 
