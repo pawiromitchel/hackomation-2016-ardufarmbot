@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Arduino WebApp</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 </head>
@@ -10,13 +13,13 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h1>Ardufarmbot</h1>
 				<div class="well bs-component">
-					<form action="" class="form-horizontal">
+					<form action="#" class="form-horizontal">
 						<fieldset>
-							<legend>Pompbediening</legend>
+							<legend>Pompbediening : <span id="status">Status</span></legend>
 							<div class="form-group">
 								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-									<button class="btn btn-success" id="pomp_aan">Aan</button>
-									<button class="btn btn-danger" id="pomp_uit">Uit</button>
+									<p class="btn btn-success" id="pomp_aan">Aan</p>
+									<p class="btn btn-danger" id="pomp_uit">Uit</p>
 								</div>
 							</div>
 						</fieldset>
@@ -26,12 +29,7 @@
 					<form class="form-horizontal">
 						<fieldset>
 							<legend>Sensoren</legend>
-							<div class="form-group">
-								<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-									<button class="btn btn-success" id="button_aan">Aan</button>
-									<button class="btn btn-danger" id="button_knop">Uit</button>
-								</div> -->
-							</div>
+							<canvas id="myChart"></canvas>
 						</fieldset>
 					</form>
 				</div>
@@ -42,19 +40,78 @@
 </html>
 
 <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='Chart.min.js') }}"></script>
 
 <script type="text/javascript">
 
 	$("#pomp_aan").click(function(){
-		$.get('http://localhost:5000/pomp/aan', function(data){
-			alert("pomp is nu aan");
+		$.get('pomp/aan', function(data){
+			$("#status").text("Aan");
 		});
 	});
 
 	$("#pomp_uit").click(function(){
-		$.get('http://localhost:5000/pomp/uit', function(data){
-			alert("pomp is nu uit");
+		$.get('pomp/uit', function(data){
+			$("#status").text("Uit");
 		});
 	});
 
+	// function to make the chart
+	function makechart(data_new = [0,0,0,0]){
+		var ctx = document.getElementById("myChart").getContext("2d");
+
+		data = {
+	        labels: ["Licht", "Temperatuur", "Humidity Level", "Humidity"],
+	        datasets: [{
+	            label: ["Level"],
+	            data: [0,0,0,0],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	            ],
+	            borderWidth: 1
+	        }]
+	    };
+
+	    data['datasets'][0]['data'] = data_new;
+
+		var myBar = new Chart(ctx).Bar(data, {
+			responsive: true,
+		    showTooltips: false,
+		    onAnimationComplete: function () {
+
+		        var ctx = this.chart.ctx;
+		        ctx.font = this.scale.font;
+		        ctx.fillStyle = this.scale.textColor
+		        ctx.textAlign = "center";
+		        ctx.textBaseline = "bottom";
+
+		        this.datasets.forEach(function (dataset) {
+		            dataset.bars.forEach(function (bar) {
+		                ctx.fillText(bar.value, bar.x, bar.y - 5);
+		            });
+		        })
+		    }
+		});
+	}
+
+	// make a empty chart
+	makechart();
+
+	// auto update the chart
+	setInterval(function(){
+		$.getJSON('/read_from_arduino', function(data){
+			// JSON.parse(data);
+			console.log(data);
+			makechart(data_new = data);
+		});
+	}, 5000);
 </script>
