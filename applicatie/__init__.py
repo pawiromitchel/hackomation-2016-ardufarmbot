@@ -9,7 +9,7 @@ from datetime import timedelta
 
 app = Flask(__name__)
 # init serial, open arduino to check the port that the arduino is using
-ser = serial.Serial('/dev/ttyACM1', 115200)
+ser = serial.Serial('/dev/ttyACM0', 115200, timeout=2)
 
 # route to read from arduino
 @app.route("/read_from_arduino", methods=['GET'])
