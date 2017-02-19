@@ -2,9 +2,8 @@
 
 import serial
 
-# init serial, open arduino to check the port that the arduino is using
-ser = serial.Serial('/dev/ttyACM1', 9600, 8, 'N', 1, timeout=5)
+ser = serial.Serial('/dev/ttyACM0', 115200, timeout=2.5)
 
-# loop the script
 while True:
-    print(ser.readline())
+	ser.write('give_results')
+	print(ser.read(100))
